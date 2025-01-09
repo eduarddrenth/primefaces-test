@@ -6,7 +6,7 @@
       xmlns:p="primefaces">
 
     <h:head>
-        <title>PrimeFaces Test</title>
+        <title>PrimeFaces issue: editingRow="true" makes inputs in datatable disabled</title>
         <h:outputScript name="test.js" />
         <h:outputStylesheet name="test.css" />
     </h:head>
@@ -14,6 +14,27 @@
 
         <h1>#{testView.string}</h1>
         <h:form id="frmTest">
+            <p:dataTable var="to" value="#{testView.list}" editable="true" editingRow="true">
+
+                <p:column>
+                    <p:rowEditor/>
+                </p:column>
+
+                <p:column headerText="id">
+                        <h:outputText value="#{to.id}"/>
+                </p:column>
+
+                <p:column headerText="Name">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{to.name}"/>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{to.name}" label="Name"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+            </p:dataTable>
 
         </h:form>
 
